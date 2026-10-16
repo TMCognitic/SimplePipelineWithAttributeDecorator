@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SimplePipelineWithAttributeDecorator.Abstractions;
+using SimplePipelineWithAttributeDecorator.Dispatching;
 using SimplePipelineWithAttributeDecorator.Pipelines;
 using System.Reflection;
 
@@ -35,6 +36,7 @@ namespace SimplePipelineWithAttributeDecorator
                     IEnumerable<BehaviorAttribute> behaviorAttributes = handler.GetCustomAttributes<BehaviorAttribute>();
 
                     services.AddScoped(interfaceHandlerType, handler);
+                    services.AddScoped<IDispatcher, Disptacher>();
 
                     if (behaviorAttributes.Any())
                     {

@@ -19,14 +19,8 @@ IServiceProvider provider = services.BuildServiceProvider();
 provider = provider.CreateScope().ServiceProvider;
 
 // Si le handler n'a pas d'attribut de comportement, aucun pipeline n'est enregistré : on appelle alors le handler directement.
-ICommandHandler<SimpleCommand> handler = provider.GetRequiredService<ICommandHandler<SimpleCommand>>();
-IPipeline<SimpleCommand>? pipeline = provider.GetService<IPipeline<SimpleCommand>>();
-
-Result result = (pipeline is not null) ? pipeline.Execute(new SimpleCommand()) : handler.Handle(new SimpleCommand());
-
-
-
-
+IDispatcher dispatcher = provider.GetRequiredService<IDispatcher>();
+Result result = dispatcher.Dispatch(new SimpleCommand());
 
 Console.WriteLine(JsonSerializer.Serialize(result));
 
@@ -34,7 +28,7 @@ Console.WriteLine(JsonSerializer.Serialize(result));
 /// <summary>
 /// Commande d'exemple, sans donnée, utilisée pour la démonstration.
 /// </summary>
-class SimpleCommand : ICommandDefinition
+public class SimpleCommand : ICommandDefinition
 {
 
 }
@@ -44,7 +38,7 @@ class SimpleCommand : ICommandDefinition
 /// déclenche la création d'un pipeline avec le comportement de journalisation.
 /// </summary>
 [Log]
-class SimpleCommandHandler : ICommandHandler<SimpleCommand>
+public class SimpleCommandHandler : ICommandHandler<SimpleCommand>
 {
     /// <summary>
     /// Traite la commande en retournant toujours un succès.
