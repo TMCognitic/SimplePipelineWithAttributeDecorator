@@ -20,29 +20,4 @@ namespace SimplePipelineWithAttributeDecorator
         /// </summary>
         public int Priority { get; } = priority;
     }
-
-    /// <summary>
-    /// Variante générique fortement typée de <see cref="BehaviorAttribute"/>.
-    /// </summary>
-    /// <remarks>
-    /// Ne dérive pas de <see cref="BehaviorAttribute"/> : elle n'est donc pas prise en compte
-    /// par <see cref="IServiceCollectionExtensions.AddHandlersFromAssembly"/> dans l'état actuel du POC.
-    /// </remarks>
-    /// <typeparam name="TBehavior">Type du comportement.</typeparam>
-    /// <typeparam name="TCommand">Type de la commande concernée.</typeparam>
-    /// <param name="priority">Priorité du comportement. 50 par défaut.</param>
-    public class BehaviorAttribute<TBehavior, TCommand>(int priority = 50) : Attribute
-        where TBehavior : IPipelineBehavior<TCommand>
-        where TCommand : ICommandDefinition
-    {
-        /// <summary>
-        /// Type du comportement à appliquer.
-        /// </summary>
-        public Type BehaviorType { get; } = typeof(TBehavior);
-
-        /// <summary>
-        /// Priorité du comportement dans le pipeline.
-        /// </summary>
-        public int Priority { get; } = priority;
-    }
 }

@@ -36,7 +36,7 @@ namespace SimplePipelineWithAttributeDecorator
                     IEnumerable<BehaviorAttribute> behaviorAttributes = handler.GetCustomAttributes<BehaviorAttribute>();
 
                     services.AddScoped(interfaceHandlerType, handler);
-                    services.AddScoped<IDispatcher, Disptacher>();
+                    services.AddScoped<IDispatcher, Dispatcher>();
 
                     if (behaviorAttributes.Any())
                     {
