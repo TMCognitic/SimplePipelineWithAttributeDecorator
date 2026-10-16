@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SimplePipelineWithAttributeDecorator.Console/SimplePipelineWithAttributeDecorator.Console.csproj" />
+  <Project Path="SimplePipelineWithAttributeDecorator/SimplePipelineWithAttributeDecorator.csproj" />
+</Solution>
